@@ -48,9 +48,7 @@ fn main() {
             lat: 49.25,
             lon: -123.1,
         },
-    ]
-    .iter()
-    {
+    ].iter(){
         println!("{}", *city);
     }
 
@@ -77,23 +75,31 @@ fn main() {
         green: u8,
         blue: u8,
     }
+    fn get_hax(color: u8) -> String {
+        if color > 15 {
+            format!("{:X}", color)
+        } else {
+            format!("0{:X}", color)
+        }
+    }
     impl Display for ColorShow {
         fn fmt(&self, format: &mut Formatter) -> Result {
-            // let red = String::from(self.red.to_string());
-            // let green = String::from(self.green.to_string());
-            // let blue = String::from(self.blue.to_string());
-
-            // red.push_str(green.as_str());
-            // red.push_str(blue.as_str());
-
-            write!(format, "RGB ({}, {}, {})", self.red, self.green, self.blue)
+            let mut out_res = String::from("");
+            out_res.push_str(&get_hax(self.red));
+            out_res.push_str(&get_hax(self.green));
+            out_res.push_str(&get_hax(self.blue));
+            write!(
+                format,
+                "RGB ({}, {}, {}) 0x{}",
+                self.red, self.green, self.blue, out_res
+            )
         }
     }
 
     let color_show = ColorShow {
-        red: 23,
+        red: 5,
         green: 56,
-        blue: 99,
+        blue: 255,
     };
     println!("{}", color_show);
 }
